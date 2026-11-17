@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar: pre-token protocols ranked by implied value</title>
+<meta name="description" content="A radar for token launches that have not happened yet: every pre-token protocol DefiLlama tracks, ranked by a comps-calibrated implied value, with a farm plan for each.">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div>
+      <p class="eyebrow">TOKEN RADAR &middot; DEFI LLAMA SNAPSHOT <span id="asof"></span></p>
+      <h1>Token Radar</h1>
+      <p class="lede">Every pre-token protocol, ranked by what its launch would be worth &mdash; priced off the protocols that already trade, not off a flat multiple. Click a row for the model behind it and the steps to farm it.</p>
+    </div>
+    <dl class="stats" id="stats"></dl>
+  </div>
+</header>
+
+<nav class="views" aria-label="Views">
+  <button type="button" data-view="board" class="view-btn active">Board</button>
+  <button type="button" data-view="live" class="view-btn">Live tokens</button>
+  <button type="button" data-view="method" class="view-btn">How it is priced</button>
+</nav>
+
+<section class="controls" id="controls" aria-label="Filters">
+  <label class="field">Search
+    <input id="q" type="search" placeholder="Name or slug&hellip;" autocomplete="off">
+  </label>
+  <label class="field">Category
+    <select id="category"><option value="">All categories</option></select>
+  </label>
+  <label class="field">Chain
+    <select id="chain"><option value="">All chains</option></select>
+  </label>
+  <label class="field">Sort by
+    <select id="sort">
+      <option value="implied">Implied value</option>
+      <option value="tvl">TVL</option>
+      <option value="growth">7-day change</option>
+      <option value="age">Age</option>
+      <option value="launch">Launch score</option>
+    </select>
+  </label>
+  <p class="count" id="count" aria-live="polite"></p>
+</section>
+
+<main id="main">
+  <section id="view-board" class="view">
+    <div class="table-wrap">
+      <table id="board">
+        <thead>
+          <tr>
+            <th class="num">#</th>
+            <th>Protocol</th>
+            <th>Category</th>
+            <th>Chains</th>
+            <th class="num">TVL</th>
+            <th class="num">7d</th>
+            <th class="num">Age</th>
+            <th class="num">Implied value</th>
+            <th class="num">Launch</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p class="hint">Click a row to open its detail view: the model breakdown, the farm plan and the live comparables that priced it.</p>
+  </section>
+
+  <section id="view-live" class="view" hidden>
+    <p class="lede small">These already trade, so the board shows the market&rsquo;s own value for them, never a model&rsquo;s. They are also the comparables: each category&rsquo;s multiple is the median market-cap-to-TVL ratio of its live protocols.</p>
+    <div class="table-wrap">
+      <table id="livetable">
+        <thead>
+          <tr>
+            <th>Protocol</th>
+            <th>Category</th>
+            <th>Chains</th>
+            <th class="num">TVL</th>
+            <th class="num">Market cap</th>
+            <th class="num">Mcap / TVL</th>
+            <th class="num">7d</th>
+          </tr>
+        </thead>
+        <tbody id="liverows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="view-method" class="view" hidden>
+    <div class="method" id="method"></div>
+  </section>
+</main>
+
+<aside id="detail" class="detail" hidden aria-label="Protocol detail">
+  <button type="button" class="close" id="detail-close" aria-label="Close detail">&times;</button>
+  <div id="detail-body"></div>
+</aside>
+
+<footer class="foot">
+  <p>Source: <span id="source"></span>. Snapshot as of <span id="asof2"></span>. Model <span id="modelver"></span>. This board is a ranking of a frozen snapshot, not investment advice; an implied value is a model&rsquo;s reading, not a price.</p>
+</footer>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
